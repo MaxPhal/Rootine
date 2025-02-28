@@ -13,16 +13,10 @@ Phalempin, M., Lippold, E., Vetterlein, D., & Schlüter, S. (2021). An improved 
 If you used Rootine for your root segmentation, please make sure to cite the above reference. 
 
 # 1. General description:
-This is a shell script that implements the Rootine v.2 workflow on a Linux OS (more information for Windows users at the end of this script).
-Two macro files are needed to run this script ('Rootinev2_macro_part1.ijm' and 'Rootinev2_macro_part3.ijm'). 
-The first part of the macro performs the stitching, the greyscale value drift correction and prepares the data for filtering with the 3D NLM. 
-The filtering of the image is performed from the command line in this executable file.  
-The second part of the macro performs the rest of the operations (i.e. from pot wall detection to the analysis of the segmented root system).
+This is a shell script that implements the Rootine v.2 workflow on a Linux OS (more information for Windows users at the end of this script). Two macro files are needed to run this script ('Rootinev2_macro_part1.ijm' and 'Rootinev2_macro_part3.ijm'). The first part of the macro performs the stitching, the greyscale value drift correction and prepares the data for filtering with the 3D NLM.  The filtering of the image is performed from the command line in this executable file. The second part of the macro performs the rest of the operations (i.e. from pot wall detection to the analysis of the segmented root system).
 
 # 2. Installation:
-This script requires Fiji/ImageJ (https://imagej.net/Fiji/Downloads, the version used in this study was ImageJ 1.53c)  and the UNLM filter based on ITK (https://www.nitrc.org/projects/unlmeans) - consult website for installation
-The ImageJ plugins 'MorpholibJ' and '3D Hysteresis Thresholding' can be installed by adding the update site IJPB-plugins and 3D ImageJ Suite in the Fiji Menu Help / Update ... / Manage Update Site.
-The ImageJ plugin 'Attenuation correction' can be retrieved from this website (http://imagejdocu.tudor.lu/doku.php?id=plugin:stacks:attenuation_correction:start) and installed manually. 
+This script requires Fiji/ImageJ (https://imagej.net/Fiji/Downloads, the version used in this study was ImageJ 1.53c)  and the UNLM filter based on ITK (https://www.nitrc.org/projects/unlmeans) - consult website for installation The ImageJ plugins 'MorpholibJ' and '3D Hysteresis Thresholding' can be installed by adding the update site IJPB-plugins and 3D ImageJ Suite in the Fiji Menu Help / Update ... / Manage Update Site. The ImageJ plugin 'Attenuation correction' can be retrieved from this website (http://imagejdocu.tudor.lu/doku.php?id=plugin:stacks:attenuation_correction:start) and installed manually. 
 
 # 3. Directories description:
 The Rootinev2_macro_part1.ijm and Rootinev2_macro_part3.ijm need to be moved into the PATH_TO_MACRO folder.
@@ -50,12 +44,12 @@ analysed_depth1_top		- the number of the slice corresponding to the top of the "
 analysed_depth2_bot		- the number of the slice corresponding to the bottom of the "depth2" layer
 analysed_depth2_top		- the number of the slice corresponding to the top of the "depth2" layer
 
-# /!\ IMPORTANT NOTE /!\ 
+** IMPORTANT NOTE ** 
 Currently, the memory limitation of the "Tubeness Plugin" used in the "Rootinev2_macro_part3" is set to > 2GB. An error is thrown if the image size exceeds 2GB. It falls down on the user to determine an approriate number of layers into which the full image will be divided. The appropriate value is found by making sure 
 that ((imagename_top.raw + imagename_bottom.raw)/nr_layers) <  2 GB. For the bottom and top test images that we provide (size = approx. 7.6 GB, after removing the overlapping areas), the number of layers is set to 4. The "nr_layers" parameter will also be used to split the images prior to 3D NLM. 
 
-"imagename_ROI_param.txt" : contains the coordinates of the bounded ROI
-#INPUT 
+** "imagename_ROI_param.txt" :** contains the coordinates of the bounded ROI
+```` shell
 x1						- the x-coordinate of the bounded ROI in the first slice of the stack
 y1					 	- the y-coordinate of the bounded ROI in the first slice of the stack
 w1						- the width of the bounded ROI in the first slice of the stack
@@ -68,7 +62,7 @@ x3						- the x-coordinate of the bounded ROI in the last slice of the stack
 x3					 	- the y-coordinate of the bounded ROI in the last slice of the stack
 w3						- the width of the bounded ROI in the first last of the stack
 h3						- the height of the bounded ROI in the first last of the stack
-
+````
 "imagename_param.txt" : contains the tunable parameters required to perform the root segmentation
 INPUT 
 blur_radius      		-  the standard deviation of the blur radius of the Gaussian filter kernel for "Unsharp masking"
