@@ -73,8 +73,8 @@ Note that the contrast threshold is not to be defined in the param.txt but in th
 #5. Root system architecture analysis description. 
 Note that this macro is tailored to analyse two depth layers for root length density (RLD) and root diameter distribution (RDD), as is described in the manuscript. Here, depth 1 refers to the deepest layer in the image stack and depth2 to the most upper layer.  If you want to use these functionality to investigate RSA traits, please enter the corresponding slice numbers of the bottom and top layer for each depth in the input file "vol_info.txt".
 
-# -- Directories --
-#Paths to important apps and macros - please adapt:
+# 5. Setting directories 
+Please adapt the following directories:
 ```` shell
 PATH_TO_FIJI=/home/phalempi/Desktop/programs/Fiji.app
 PATH_TO_UNLM=/home/phalempi/Desktop/programs/UnbiasedNonLocalMeans/bin/Linux
