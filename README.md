@@ -25,17 +25,11 @@ The folders that contain the executables for FIJI and UNLM need to be set in PAT
 # 4. Image file and input description:
 This script is tailored for two .mhd files called imagename_top.mhd and imagename_bot.mhd that are concatenated into one image prior to the greyscale value drift correction.  
 Make sure that the image size in the x-y dimensions has even numbers. Otherwise there are issues with rescaling of the image.
-If you want to start with one image or a different file format (e.g. stack of .tiff files), adapt the content of Rootinev2_macro_part1.ijm. The macro parts requires three input text files containing values described down below. These text files should be named :
-
-"imagename_vol_info.txt"
-"imagename_ROI_param.txt"
-"imagename_param.txt"
-
-These input files need to be present in the "PATH_TO_IMAGE" folder. Note that all parameters and their values should always be separated with a tabulation.
-IMPORTANT : the txt file reading function is sensitive to empty characters. Avoid the presence of empty lines!
+If you want to start with one image or a different file format (e.g. stack of .tiff files), adapt the content of Rootinev2_macro_part1.ijm. The macro parts requires three input text files containing values described down below. These text files should be named "imagename_vol_info.txt, "imagename_ROI_param.txt", and "imagename_param.txt". These input files need to be present in the "PATH_TO_IMAGE" folder. Note that all parameters and their values should always be separated with a tabulation. IMPORTANT : the txt file reading function is sensitive to empty characters. Avoid the presence of empty lines!
 
 "imagename_vol_info.txt" : contains some volume information required to open, concatenate the top and bottom images and analyse RSA.
-#INPUT 
+
+```` shell
 nr_layers            		- the number of layers into which the input image will divided. /!\ See important note below /!\ 
 overlap_slice_bot_stack	- the number of the slice where the overlap region starts in the bottom image
 overlap_slice_top_stack 	- the number of the slice where the overlap region starts in the top image
@@ -43,6 +37,7 @@ analysed_depth1_bot		- the number of the slice corresponding to the bottom of th
 analysed_depth1_top		- the number of the slice corresponding to the top of the "depth1" layer
 analysed_depth2_bot		- the number of the slice corresponding to the bottom of the "depth2" layer
 analysed_depth2_top		- the number of the slice corresponding to the top of the "depth2" layer
+````
 
 ** IMPORTANT NOTE ** 
 Currently, the memory limitation of the "Tubeness Plugin" used in the "Rootinev2_macro_part3" is set to > 2GB. An error is thrown if the image size exceeds 2GB. It falls down on the user to determine an approriate number of layers into which the full image will be divided. The appropriate value is found by making sure 
@@ -64,7 +59,8 @@ w3						- the width of the bounded ROI in the first last of the stack
 h3						- the height of the bounded ROI in the first last of the stack
 ````
 "imagename_param.txt" : contains the tunable parameters required to perform the root segmentation
-INPUT 
+
+```` shell
 blur_radius      		-  the standard deviation of the blur radius of the Gaussian filter kernel for "Unsharp masking"
 mask_weight 	     	-  the weight of the mask for "Unsharp masking"
 f_r			        -  the root greyvalue factor determined on a test image to retrieve the root greyvalue
@@ -74,6 +70,7 @@ dr_max			-  the diameter of the biggest root in the image (expressed in number o
 median_kernel_size    	-  the kernel size in XYZ dimension of the 3D Median filter
 t_v				-  the vesselness threshold to be used during the false negatives recovery step
 t_s				-  the size threshold to be used during the false negatives recovery step
+````
 
 Note that the contrast threshold is not to be defined in the param.txt but in this bash file. Please enter the value suited to the noise level in the image in line 113.
 
@@ -82,11 +79,13 @@ Note that this macro is tailored to analyse two depth layers for root length den
 
 # -- Directories --
 #Paths to important apps and macros - please adapt:
+```` shell
 PATH_TO_FIJI=/home/phalempi/Desktop/programs/Fiji.app
 PATH_TO_UNLM=/home/phalempi/Desktop/programs/UnbiasedNonLocalMeans/bin/Linux
 PATH_TO_MACRO=/media/phalempi/macro
 PATH_TO_IMAGE=/media/phalempi/images
 IMAGE=07
+````
 
 # -- Workflow (LINUX OS) --
 ### Part 1: Image stichting, normalization and preparation for filtering 
